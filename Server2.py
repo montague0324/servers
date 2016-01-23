@@ -1,12 +1,11 @@
 #!/usr/bin/env python
  
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+import BaseHTTPServer
 import os
  
 #Create custom HTTPRequestHandler class
-class KodeFunHTTPRequestHandler(BaseHTTPRequestHandler):
+class MyHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
   
-  #handle GET command
   def do_GET(self):
     rootdir = 'C:\Users\mike.montague\Documents\Python' #file location
     try:
@@ -16,7 +15,7 @@ class KodeFunHTTPRequestHandler(BaseHTTPRequestHandler):
         #send code 200 response
         self.send_response(200)
  
-        #send header first
+        #send header
         self.send_header('Content-type','text-html')
         self.end_headers()
  
@@ -31,11 +30,10 @@ class KodeFunHTTPRequestHandler(BaseHTTPRequestHandler):
 def run():
   print('http server is starting...')
  
-  #ip and port of servr
-  #by default http server port is 80
+  #Create server. Default port is 80
   server_address = ('127.0.0.1', 1234)
-  httpd = HTTPServer(server_address, KodeFunHTTPRequestHandler)
-  print('http server is running...')
+  httpd = BaseHTTPServer.HTTPServer(server_address, MyHTTPRequestHandler)
+  print('http server running...')
   httpd.serve_forever()
   
 if __name__ == '__main__':
