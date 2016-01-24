@@ -37,7 +37,7 @@ def run():
   server_address = ('127.0.0.1', 1234)
   #httpd = BaseHTTPServer.HTTPServer(server_address, MyHTTPRequestHandler)
   server = BaseHTTPServer.HTTPServer(('', PORT_NUMBER), MyHTTPRequestHandler)
-  print "type into browser: 127.0.0.1:1234/Test.html OR localhost:1234/Test.html OR <network addr>:1234/Test.html"
+  print "use address: 127.0.0.1:1234/Test.html OR localhost:1234/Test.html OR <network addr>:1234/Test.html"
   server.serve_forever()
   
 if __name__ == '__main__':
