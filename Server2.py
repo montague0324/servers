@@ -3,11 +3,14 @@
 import BaseHTTPServer
 import os
  
+PORT_NUMBER = 1234
+
 #Create custom HTTPRequestHandler class
 class MyHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
   
   def do_GET(self):
-    rootdir = 'C:\Users\mike.montague\Documents\Python' #file location
+    cwd = os.getcwd()
+    rootdir = cwd # 'C:\Users\mike.montague\Documents\Python\Servers' 
     try:
       if self.path.endswith('.html'):
         f = open(rootdir + self.path) #open requested file
@@ -32,9 +35,10 @@ def run():
  
   #Create server. Default port is 80
   server_address = ('127.0.0.1', 1234)
-  httpd = BaseHTTPServer.HTTPServer(server_address, MyHTTPRequestHandler)
-  print('http server running...')
-  httpd.serve_forever()
+  #httpd = BaseHTTPServer.HTTPServer(server_address, MyHTTPRequestHandler)
+  server = BaseHTTPServer.HTTPServer(('', PORT_NUMBER), MyHTTPRequestHandler)
+  print "type into browser: 127.0.0.1:1234/Test.html OR localhost:1234/Test.html OR <network addr>:1234/Test.html"
+  server.serve_forever()
   
 if __name__ == '__main__':
   run()
